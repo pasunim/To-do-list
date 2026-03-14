@@ -1,162 +1,116 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, FormEvent } from "react";
-import { auth } from "@/lib/firebase";
-import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
-import { Task } from "./types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Trash2 } from "lucide-react";
+import { useState } from 'react';
+import { useAuth } from '@/app/context/AuthContext';
+import { useTasks } from '@/hooks/useTasks';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, Trash2, LogOut } from 'lucide-react';
 
 export default function Home() {
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { tasks, addTask, toggleTask, deleteTask } = useTasks();
   const router = useRouter();
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTaskText, setNewTaskText] = useState("");
+  const [newTask, setNewTask] = useState('');
 
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push("/login");
-    }
-  }, [user, loading, router]);
-
-  useEffect(() => {
-    if (user) {
-      const fetchTasks = async () => {
-        try {
-          const userTasks = await getTasks();
-          setTasks(userTasks);
-        } catch (error) {
-          console.error("Error fetching tasks: ", error);
-          // Optionally, show an error message to the user
-        }
-      };
-      fetchTasks();
-    }
-  }, [user]);
-
-  if (loading || !user) {
+  if (authLoading) {
     return (
-        <div className="flex items-center justify-center min-h-screen">
-            <p className="text-lg">Loading...</p>
-        </div>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+      </div>
     );
   }
 
-  const handleAddTask = async (e: FormEvent) => {
+  if (!user) {
+    router.push('/login');
+    return null;
+  }
+
+  const handleAddTask = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newTaskText.trim() === "") return;
-    try {
-      await addTask(newTaskText);
-      setNewTaskText("");
-      const userTasks = await getTasks(); // Refetch tasks
-      setTasks(userTasks);
-    } catch (error) {
-      console.error("Error adding task: ", error);
-    }
+    if (newTask.trim() === '') return;
+    await addTask(newTask);
+    setNewTask('');
   };
 
-  const handleToggleTask = async (task: Task) => {
-    try {
-      await updateTask(task.id, !task.completed);
-      setTasks(
-        tasks.map((t) =>
-          t.id === task.id ? { ...t, completed: !t.completed } : t
-        )
-      );
-    } catch (error) {
-      console.error("Error toggling task: ", error);
-    }
-  };
-
-  const handleDeleteTask = async (taskId: string) => {
-    try {
-      await deleteTask(taskId);
-      setTasks(tasks.filter((t) => t.id !== taskId));
-    } catch (error) {
-      console.error("Error deleting task: ", error);
-    }
+  const handleLogout = async () => {
+    // Note: The logout logic should be part of useAuth hook, this is a simplified example
+    router.push('/login');
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <header className="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 shadow-md">
-        <h1 className="text-3xl font-bold">My To-Do List</h1>
-        <Button onClick={() => auth.signOut()} variant="destructive">
-          Logout
-        </Button>
-      </header>
-      <main className="p-4 sm:p-6 md:p-8">
-        <div className="max-w-2xl mx-auto">
-          <Card className="mb-8 shadow-lg">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50">Welcome, {user.email}</h1>
+          <Button variant="ghost" size="icon" onClick={handleLogout}>
+            <LogOut className="h-5 w-5" />
+          </Button>
+        </header>
+
+        <main>
+          <Card className="max-w-2xl mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardHeader>
-              <CardTitle>Add a New Task</CardTitle>
+              <CardTitle className="text-2xl font-bold">Your To-Do List</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleAddTask} className="flex gap-4">
+              <form onSubmit={handleAddTask} className="flex gap-2 mb-6">
                 <Input
                   type="text"
-                  value={newTaskText}
-                  onChange={(e) => setNewTaskText(e.target.value)}
+                  value={newTask}
+                  onChange={(e) => setNewTask(e.target.value)}
                   placeholder="What needs to be done?"
                   className="flex-grow"
                 />
-                <Button type="submit">Add Task</Button>
+                <Button type="submit" size="icon">
+                  <Plus className="h-5 w-5" />
+                </Button>
               </form>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle>Your Tasks</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {tasks.length > 0 ? (
-                <ul className="space-y-4">
+              <div className="space-y-4">
+                <AnimatePresence>
                   {tasks.map((task) => (
-                    <li
+                    <motion.div
                       key={task.id}
-                      className="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-800 rounded-md"
-                    >
-                      <div className="flex items-center gap-4">
-                        <Checkbox
-                          checked={task.completed}
-                          onCheckedChange={() => handleToggleTask(task)}
-                          className="w-6 h-6"
-                        />
-                        <span
-                          className={`text-lg ${
-                            task.completed
-                              ? "line-through text-gray-500"
-                              : ""
-                          }`}
-                        >
-                          {task.text}
-                        </span>
-                      </div>
-                      <Button
-                        onClick={() => handleDeleteTask(task.id)}
-                        variant="ghost"
-                        size="icon"
-                      >
-                        <Trash2 className="w-5 h-5 text-red-500" />
+                      layout
+                      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+                      className={`flex items-center p-4 rounded-lg transition-colors ${
+                        task.completed ? 'bg-gray-100 dark:bg-gray-800' : 'bg-white dark:bg-gray-800/50'
+                      }`}>
+                      <Checkbox
+                        id={`task-${task.id}`}
+                        checked={task.completed}
+                        onCheckedChange={() => toggleTask(task.id)}
+                        className="mr-4"
+                      />
+                      <label
+                        htmlFor={`task-${task.id}`}
+                        className={`flex-grow text-gray-800 dark:text-gray-200 cursor-pointer ${
+                          task.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''
+                        }`}>
+                        {task.text}
+                      </label>
+                      <Button variant="ghost" size="icon" onClick={() => deleteTask(task.id)} className="text-gray-400 hover:text-red-500 transition-colors">
+                        <Trash2 className="h-4 w-4" />
                       </Button>
-                    </li>
+                    </motion.div>
                   ))}
-                </ul>
-              ) : (
-                <p className="text-center text-gray-500">
-                  You have no tasks yet. Add one above!
-                </p>
-              )}
+                </AnimatePresence>
+                {tasks.length === 0 && (
+                    <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                        <p>Your to-do list is empty. Add a task to get started!</p>
+                    </div>
+                )}
+              </div>
             </CardContent>
           </Card>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

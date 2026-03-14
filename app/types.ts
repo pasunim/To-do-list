@@ -1,6 +1,16 @@
+import { Timestamp } from 'firebase/firestore';
+
 export interface Task {
-  id: string;
-  text: string;
-  completed: boolean;
-  createdAt: any; // Using `any` for Firebase Timestamp
+    id: string;
+    text: string;
+    completed: boolean;
+    createdAt: Timestamp;
+  }
+
+export interface User {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
 }
+  
