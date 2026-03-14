@@ -1,47 +1,92 @@
-import { firestore } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+
+"use server";
+
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+  deleteDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { Task } from "./types";
+import { auth } from "@/lib/firebase"; // Import auth
 
-const tasksCollection = collection(firestore, "tasks");
+// Add a new task
+export async function addTask(text: string): Promise<string> {
+  const user = auth.currentUser;
+  if (!user) {
+    throw new Error("User not logged in");
+  }
 
-export const addTask = async (userId: string, text: string) => {
   try {
-    await addDoc(tasksCollection, {
-      userId,
-      text,
+    const docRef = await addDoc(collection(db, "tasks"), {
+      uid: user.uid,
+      text: text,
       completed: false,
       createdAt: serverTimestamp(),
     });
-  } catch (error) {
-    console.error("Error adding task: ", error);
+    return docRef.id;
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    throw new Error("Failed to add task");
   }
-};
+}
 
-export const getTasks = async (userId: string): Promise<Task[]> => {
-  try {
-    const q = query(tasksCollection, where("userId", "==", userId));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Task));
-  } catch (error) {
-    console.error("Error getting tasks: ", error);
+// Get all tasks for the logged-in user
+export async function getTasks(): Promise<Task[]> {
+  const user = auth.currentUser;
+  if (!user) {
     return [];
   }
-};
 
-export const updateTask = async (id: string, updates: Partial<Task>) => {
+  const q = query(
+    collection(db, "tasks"),
+    where("uid", "==", user.uid),
+    orderBy("createdAt", "desc")
+  );
+
   try {
-    const taskDoc = doc(firestore, "tasks", id);
-    await updateDoc(taskDoc, updates);
-  } catch (error) {
-    console.error("Error updating task: ", error);
+    const querySnapshot = await getDocs(q);
+    const tasks = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        text: data.text,
+        completed: data.completed,
+        createdAt: data.createdAt,
+      };
+    });
+    return tasks;
+  } catch (e) {
+    console.error("Error getting documents: ", e);
+    throw new Error("Failed to get tasks");
   }
-};
+}
 
-export const deleteTask = async (id: string) => {
+// Update a task's completion status
+export async function updateTask(id: string, completed: boolean): Promise<void> {
+  const taskDoc = doc(db, "tasks", id);
   try {
-    const taskDoc = doc(firestore, "tasks", id);
+    await updateDoc(taskDoc, { completed });
+  } catch (e) {
+    console.error("Error updating document: ", e);
+    throw new Error("Failed to update task");
+  }
+}
+
+// Delete a task
+export async function deleteTask(id: string): Promise<void> {
+  const taskDoc = doc(db, "tasks", id);
+  try {
     await deleteDoc(taskDoc);
-  } catch (error) {
-    console.error("Error deleting task: ", error);
+  } catch (e) {
+    console.error("Error deleting document: ", e);
+    throw new Error("Failed to delete task");
   }
-};
+}

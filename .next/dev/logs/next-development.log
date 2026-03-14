@@ -1,392 +1,335 @@
-[00:00:04.436] Server  LOG     ✓ Ready in 3.5s
-[00:00:07.522] Server  LOG     ○ Compiling / ...
-[00:00:15.532] Server  WARN    ⚠ Cross origin request detected from 9000-firebase-to-do-list-1773458771961.cluster-a6zx3cwnb5hnuwbgyxmofxpkfe.cloudworkstations.dev to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+[00:00:24.336] Server  LOG     ✓ Ready in 19.1s
+[00:00:27.534] Server  LOG     ○ Compiling / ...
+[00:00:32.398] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:1:1
+Module not found: Can't resolve '@/lib/firebase'
+> 1 | import { firestore } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+  3 | import { Task } from "./types";
+  4 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/firestore.ts [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/firestore.ts [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:2:1
+Module not found: Can't resolve 'firebase/firestore'
+  1 | import { firestore } from "@/lib/firebase";
+> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Task } from "./types";
+  4 |
+  5 | const tasksCollection = collection(firestore, "tasks");
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/firestore.ts [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/firestore.ts [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:32.493] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:1:1
+Module not found: Can't resolve '@/lib/firebase'
+> 1 | import { firestore } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+  3 | import { Task } from "./types";
+  4 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/firestore.ts [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/firestore.ts [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:2:1
+Module not found: Can't resolve 'firebase/firestore'
+  1 | import { firestore } from "@/lib/firebase";
+> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Task } from "./types";
+  4 |
+  5 | const tasksCollection = collection(firestore, "tasks");
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/firestore.ts [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/firestore.ts [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:34.948] Server  WARN    ⚠ Cross origin request detected from 9000-firebase-to-do-list-1773458771961.cluster-a6zx3cwnb5hnuwbgyxmofxpkfe.cloudworkstations.dev to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
 Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
-[00:00:15.612] Browser WARN    Image with src "https://9000-firebase-to-do-list-1773458771961.cluster-a6zx3cwnb5hnuwbgyxmofxpkfe.cloudworkstations.dev/vercel.svg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:07:40.760] Server  LOG       Reload env: .env.local
-[00:17:16.277] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:19.334] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:19.474] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:19.528] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:20.488] Browser ERROR   {"name":"PageNotFoundError"}
-[00:17:20.488] Browser ERROR   uncaughtError: PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:39.114] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:39.147] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:17:40.209] Browser ERROR   {"name":"PageNotFoundError"}
-[00:17:40.209] Browser ERROR   uncaughtError: PageNotFoundError: Cannot find module for page: route not found /page
-[00:18:15.644] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:18:15.679] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:18:15.715] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:18:15.760] Server  ERROR   ⨯ PageNotFoundError: Cannot find module for page: route not found /page
-[00:18:17.112] Browser ERROR   {"name":"PageNotFoundError"}
-[00:18:17.112] Browser ERROR   uncaughtError: PageNotFoundError: Cannot find module for page: route not found /page
-[00:18:36.916] Server  ERROR   ⨯ ./app/page.tsx:3:1
-Module not found: Can't resolve '@/context/AuthContext'
-  1 | "use client";
-  2 |
-> 3 | import { useAuth } from "@/context/AuthContext";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | import { useRouter } from "next/navigation";
-  5 | import { useEffect } from "react";
-  6 |
-
-Import map: aliased to relative './src/context/AuthContext' inside of [project]/
-
-
-Import traces:
-  Client Component Browser:
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:5:1
-Module not found: Can't resolve '@/lib/firebase'
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-  4 | import { User, onAuthStateChanged } from "firebase/auth";
-> 5 | import { auth } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  6 |
-  7 | interface AuthContextType {
-  8 |   user: User | null;
-
-Import map: aliased to relative './src/lib/firebase' inside of [project]/
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:4:1
-Module not found: Can't resolve 'firebase/auth'
-  2 |
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-> 4 | import { User, onAuthStateChanged } from "firebase/auth";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  5 | import { auth } from "@/lib/firebase";
-  6 |
-  7 | interface AuthContextType {
-
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:18:36.951] Server  ERROR   ⨯ ./app/page.tsx:3:1
-Module not found: Can't resolve '@/context/AuthContext'
-  1 | "use client";
-  2 |
-> 3 | import { useAuth } from "@/context/AuthContext";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | import { useRouter } from "next/navigation";
-  5 | import { useEffect } from "react";
-  6 |
-
-Import map: aliased to relative './src/context/AuthContext' inside of [project]/
-
-
-Import traces:
-  Client Component Browser:
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:5:1
-Module not found: Can't resolve '@/lib/firebase'
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-  4 | import { User, onAuthStateChanged } from "firebase/auth";
-> 5 | import { auth } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  6 |
-  7 | interface AuthContextType {
-  8 |   user: User | null;
-
-Import map: aliased to relative './src/lib/firebase' inside of [project]/
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:4:1
-Module not found: Can't resolve 'firebase/auth'
-  2 |
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-> 4 | import { User, onAuthStateChanged } from "firebase/auth";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  5 | import { auth } from "@/lib/firebase";
-  6 |
-  7 | interface AuthContextType {
-
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:18:36.981] Server  ERROR   ⨯ ./app/page.tsx:3:1
-Module not found: Can't resolve '@/context/AuthContext'
-  1 | "use client";
-  2 |
-> 3 | import { useAuth } from "@/context/AuthContext";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | import { useRouter } from "next/navigation";
-  5 | import { useEffect } from "react";
-  6 |
-
-Import map: aliased to relative './src/context/AuthContext' inside of [project]/
-
-
-Import traces:
-  Client Component Browser:
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:5:1
-Module not found: Can't resolve '@/lib/firebase'
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-  4 | import { User, onAuthStateChanged } from "firebase/auth";
-> 5 | import { auth } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  6 |
-  7 | interface AuthContextType {
-  8 |   user: User | null;
-
-Import map: aliased to relative './src/lib/firebase' inside of [project]/
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:4:1
-Module not found: Can't resolve 'firebase/auth'
-  2 |
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-> 4 | import { User, onAuthStateChanged } from "firebase/auth";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  5 | import { auth } from "@/lib/firebase";
-  6 |
-  7 | interface AuthContextType {
-
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:18:37.049] Server  ERROR   ⨯ ./app/page.tsx:3:1
-Module not found: Can't resolve '@/context/AuthContext'
-  1 | "use client";
-  2 |
-> 3 | import { useAuth } from "@/context/AuthContext";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | import { useRouter } from "next/navigation";
-  5 | import { useEffect } from "react";
-  6 |
-
-Import map: aliased to relative './src/context/AuthContext' inside of [project]/
-
-
-Import traces:
-  Client Component Browser:
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:5:1
-Module not found: Can't resolve '@/lib/firebase'
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-  4 | import { User, onAuthStateChanged } from "firebase/auth";
-> 5 | import { auth } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  6 |
-  7 | interface AuthContextType {
-  8 |   user: User | null;
-
-Import map: aliased to relative './src/lib/firebase' inside of [project]/
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:4:1
-Module not found: Can't resolve 'firebase/auth'
-  2 |
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-> 4 | import { User, onAuthStateChanged } from "firebase/auth";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  5 | import { auth } from "@/lib/firebase";
-  6 |
-  7 | interface AuthContextType {
-
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:18:37.066] Server  ERROR   ⨯ ./app/page.tsx:3:1
-Module not found: Can't resolve '@/context/AuthContext'
-  1 | "use client";
-  2 |
-> 3 | import { useAuth } from "@/context/AuthContext";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | import { useRouter } from "next/navigation";
-  5 | import { useEffect } from "react";
-  6 |
-
-Import map: aliased to relative './src/context/AuthContext' inside of [project]/
-
-
-Import traces:
-  Client Component Browser:
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:5:1
-Module not found: Can't resolve '@/lib/firebase'
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-  4 | import { User, onAuthStateChanged } from "firebase/auth";
-> 5 | import { auth } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  6 |
-  7 | interface AuthContextType {
-  8 |   user: User | null;
-
-Import map: aliased to relative './src/lib/firebase' inside of [project]/
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-
-./app/context/AuthContext.tsx:4:1
-Module not found: Can't resolve 'firebase/auth'
-  2 |
-  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-> 4 | import { User, onAuthStateChanged } from "firebase/auth";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  5 | import { auth } from "@/lib/firebase";
-  6 |
-  7 | interface AuthContextType {
-
-
-
-Import trace:
-  Server Component:
-    ./app/context/AuthContext.tsx
-    ./app/layout.tsx
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:18:38.604] Browser ERROR   {"name":"Error"}
-[00:18:38.604] Browser ERROR   uncaughtError: Error: ./app/page.tsx:3:1
-Module not found: Can't resolve '@/context/AuthContext'
-  1 | "use client";
-  2 |
-> 3 | import { useAuth } from "@/context/AuthContext";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | import { useRouter } from "next/navigation";
-  5 | import { useEffect } from "react";
-  6 |
-
-Import map: aliased to relative './src/context/AuthContext' inside of [project]/
-
-
-Import traces:
-  Client Component Browser:
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:19:11.233] Server  ERROR   ⨯ ./app/page.tsx:3:1
+[00:00:35.118] Browser ERROR   {"name":"Error"}
+[00:00:35.118] Browser ERROR   uncaughtError: Error: ./app/page.tsx:3:1
 Module not found: Can't resolve '@/context/AuthContext'
   1 | "use client";
   2 |
@@ -411,7 +354,7 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.238] Server  ERROR   ⨯ ./app/page.tsx:3:1
+[00:07:08.763] Server  ERROR   ⨯ ./app/page.tsx:3:1
 Module not found: Can't resolve '@/context/AuthContext'
   1 | "use client";
   2 |
@@ -436,7 +379,7 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.246] Server  ERROR   ⨯ ./app/page.tsx:3:1
+[00:07:08.767] Server  ERROR   ⨯ ./app/page.tsx:3:1
 Module not found: Can't resolve '@/context/AuthContext'
   1 | "use client";
   2 |
@@ -461,7 +404,7 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.252] Server  ERROR   ⨯ ./app/page.tsx:3:1
+[00:07:08.769] Server  ERROR   ⨯ ./app/page.tsx:3:1
 Module not found: Can't resolve '@/context/AuthContext'
   1 | "use client";
   2 |
@@ -486,7 +429,32 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.256] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+[00:07:08.772] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.773] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
 Module not found: Can't resolve '@/lib/firebase'
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
   4 | import { User, onAuthStateChanged } from "firebase/auth";
@@ -507,7 +475,7 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.257] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+[00:07:08.775] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
 Module not found: Can't resolve '@/lib/firebase'
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
   4 | import { User, onAuthStateChanged } from "firebase/auth";
@@ -528,7 +496,7 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.263] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+[00:07:08.776] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
 Module not found: Can't resolve '@/lib/firebase'
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
   4 | import { User, onAuthStateChanged } from "firebase/auth";
@@ -549,7 +517,7 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.265] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+[00:07:08.777] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
 Module not found: Can't resolve '@/lib/firebase'
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
   4 | import { User, onAuthStateChanged } from "firebase/auth";
@@ -570,107 +538,71 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.266] Server  ERROR   ⨯ ./app/firestore.ts:1:1
+[00:07:08.780] Server  ERROR   ⨯ ./app/firestore.ts:16:1
 Module not found: Can't resolve '@/lib/firebase'
-> 1 | import { firestore } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-  3 | import { Task } from "./types";
-  4 |
+  14 |   orderBy,
+  15 | } from "firebase/firestore";
+> 16 | import { db } from "@/lib/firebase";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+  19 |
 
 Import map: aliased to relative './src/lib/firebase' inside of [project]/
 
 
-Import traces:
-  Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.274] Server  ERROR   ⨯ ./app/firestore.ts:1:1
+[00:07:08.781] Server  ERROR   ⨯ ./app/firestore.ts:16:1
 Module not found: Can't resolve '@/lib/firebase'
-> 1 | import { firestore } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-  3 | import { Task } from "./types";
-  4 |
+  14 |   orderBy,
+  15 | } from "firebase/firestore";
+> 16 | import { db } from "@/lib/firebase";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+  19 |
 
 Import map: aliased to relative './src/lib/firebase' inside of [project]/
 
 
-Import traces:
-  Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.278] Server  ERROR   ⨯ ./app/firestore.ts:1:1
+[00:07:08.782] Server  ERROR   ⨯ ./app/firestore.ts:18:1
 Module not found: Can't resolve '@/lib/firebase'
-> 1 | import { firestore } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-  3 | import { Task } from "./types";
-  4 |
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+> 18 | import { auth } from "@/lib/firebase"; // Import auth
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | // Add a new task
+  21 | export async function addTask(text: string): Promise<string> {
 
 Import map: aliased to relative './src/lib/firebase' inside of [project]/
 
 
-Import traces:
-  Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.285] Server  ERROR   ⨯ ./app/firestore.ts:1:1
+[00:07:08.785] Server  ERROR   ⨯ ./app/firestore.ts:18:1
 Module not found: Can't resolve '@/lib/firebase'
-> 1 | import { firestore } from "@/lib/firebase";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-  3 | import { Task } from "./types";
-  4 |
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+> 18 | import { auth } from "@/lib/firebase"; // Import auth
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | // Add a new task
+  21 | export async function addTask(text: string): Promise<string> {
 
 Import map: aliased to relative './src/lib/firebase' inside of [project]/
 
 
-Import traces:
-  Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
-    ./app/page.tsx [Client Component Browser]
-    ./app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
-    ./app/page.tsx [Client Component SSR]
-    ./app/page.tsx [Server Component]
-
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.288] Server  ERROR   ⨯ ./app/page.tsx:6:1
+[00:07:08.788] Server  ERROR   ⨯ ./app/page.tsx:6:1
 Module not found: Can't resolve '@/lib/firebase'
   4 | import { useRouter } from "next/navigation";
   5 | import { useEffect, useState } from "react";
@@ -695,7 +627,7 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.292] Server  ERROR   ⨯ ./app/page.tsx:6:1
+[00:07:08.790] Server  ERROR   ⨯ ./app/page.tsx:6:1
 Module not found: Can't resolve '@/lib/firebase'
   4 | import { useRouter } from "next/navigation";
   5 | import { useEffect, useState } from "react";
@@ -720,7 +652,7 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.295] Server  ERROR   ⨯ ./app/page.tsx:6:1
+[00:07:08.793] Server  ERROR   ⨯ ./app/page.tsx:6:1
 Module not found: Can't resolve '@/lib/firebase'
   4 | import { useRouter } from "next/navigation";
   5 | import { useEffect, useState } from "react";
@@ -745,7 +677,7 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.300] Server  ERROR   ⨯ ./app/page.tsx:6:1
+[00:07:08.795] Server  ERROR   ⨯ ./app/page.tsx:6:1
 Module not found: Can't resolve '@/lib/firebase'
   4 | import { useRouter } from "next/navigation";
   5 | import { useEffect, useState } from "react";
@@ -770,7 +702,39 @@ Import traces:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.302] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+[00:07:08.798] Server  ERROR   ⨯ ./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.799] Server  ERROR   ⨯ ./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.800] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
 Module not found: Can't resolve 'firebase/auth'
   2 |
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
@@ -790,7 +754,7 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.307] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+[00:07:08.802] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
 Module not found: Can't resolve 'firebase/auth'
   2 |
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
@@ -810,7 +774,7 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.309] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+[00:07:08.805] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
 Module not found: Can't resolve 'firebase/auth'
   2 |
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
@@ -830,7 +794,7 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.312] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+[00:07:08.808] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
 Module not found: Can't resolve 'firebase/auth'
   2 |
   3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
@@ -850,502 +814,2035 @@ Import trace:
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.316] Server  ERROR   ⨯ ./app/firestore.ts:2:1
+[00:07:08.812] Server  ERROR   ⨯ ./app/firestore.ts:4:1
 Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
 
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.814] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.818] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.824] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.826] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.829] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.832] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.834] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.836] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.838] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:08.844] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:24.546] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.317] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
 
+./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:16:1
+Module not found: Can't resolve '@/lib/firebase'
+  14 |   orderBy,
+  15 | } from "firebase/firestore";
+> 16 | import { db } from "@/lib/firebase";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+  19 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:18:1
+Module not found: Can't resolve '@/lib/firebase'
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+> 18 | import { auth } from "@/lib/firebase"; // Import auth
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | // Add a new task
+  21 | export async function addTask(text: string): Promise<string> {
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.320] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
 
+./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:25.746] Browser ERROR   {"name":"Error"}
+[00:07:25.746] Browser ERROR   uncaughtError: Error: ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.322] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.714] Server  ERROR   ⨯ ./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/ui/button'
+   8 | import { Task } from "./types";
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+> 10 | import { Button } from "@/components/ui/button";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
 
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.326] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.723] Server  ERROR   ⨯ ./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/ui/button'
+   8 | import { Task } from "./types";
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+> 10 | import { Button } from "@/components/ui/button";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
 
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.328] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.729] Server  ERROR   ⨯ ./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/ui/button'
+   8 | import { Task } from "./types";
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+> 10 | import { Button } from "@/components/ui/button";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
 
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.331] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.734] Server  ERROR   ⨯ ./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/ui/button'
+   8 | import { Task } from "./types";
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+> 10 | import { Button } from "@/components/ui/button";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
 
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.333] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.739] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.337] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.744] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.339] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.750] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.341] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.759] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.344] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.766] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.347] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.771] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.349] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.781] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.352] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.786] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.353] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.792] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.356] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.798] Server  ERROR   ⨯ ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/card'
+   7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+   8 | import { Task } from "./types";
+>  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+  12 | import { Checkbox } from "@/components/ui/checkbox";
 
+Import map: aliased to relative './src/components/ui/card' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.358] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.804] Server  ERROR   ⨯ ./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+> 12 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+  15 | export default function Home() {
 
+Import map: aliased to relative './src/components/ui/checkbox' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.361] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.810] Server  ERROR   ⨯ ./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+> 12 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+  15 | export default function Home() {
 
+Import map: aliased to relative './src/components/ui/checkbox' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
 
 https://nextjs.org/docs/messages/module-not-found
 
 
-[00:19:11.363] Server  ERROR   ⨯ ./app/firestore.ts:2:1
-Module not found: Can't resolve 'firebase/firestore'
-  1 | import { firestore } from "@/lib/firebase";
-> 2 | import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import { Task } from "./types";
-  4 |
-  5 | const tasksCollection = collection(firestore, "tasks");
+[00:07:30.815] Server  ERROR   ⨯ ./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+> 12 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+  15 | export default function Home() {
 
+Import map: aliased to relative './src/components/ui/checkbox' inside of [project]/
 
 
 Import traces:
   Client Component Browser:
-    ./app/firestore.ts [Client Component Browser]
     ./app/page.tsx [Client Component Browser]
     ./app/page.tsx [Server Component]
 
   Client Component SSR:
-    ./app/firestore.ts [Client Component SSR]
     ./app/page.tsx [Client Component SSR]
     ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.820] Server  ERROR   ⨯ ./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+  10 | import { Button } from "@/components/ui/button";
+  11 | import { Input } from "@/components/ui/input";
+> 12 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+  15 | export default function Home() {
+
+Import map: aliased to relative './src/components/ui/checkbox' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.830] Server  ERROR   ⨯ ./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/ui/input'
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  10 | import { Button } from "@/components/ui/button";
+> 11 | import { Input } from "@/components/ui/input";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.833] Server  ERROR   ⨯ ./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/ui/input'
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  10 | import { Button } from "@/components/ui/button";
+> 11 | import { Input } from "@/components/ui/input";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.839] Server  ERROR   ⨯ ./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/ui/input'
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  10 | import { Button } from "@/components/ui/button";
+> 11 | import { Input } from "@/components/ui/input";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.844] Server  ERROR   ⨯ ./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/ui/input'
+   9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  10 | import { Button } from "@/components/ui/button";
+> 11 | import { Input } from "@/components/ui/input";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Checkbox } from "@/components/ui/checkbox";
+  13 | import { Trash2 } from "lucide-react";
+  14 |
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.848] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.855] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.856] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.861] Server  ERROR   ⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve '@/context/AuthContext'
+  1 | "use client";
+  2 |
+> 3 | import { useAuth } from "@/context/AuthContext";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+  6 | import { auth } from "@/lib/firebase";
+
+Import map: aliased to relative './src/context/AuthContext' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.862] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.862] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.863] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.864] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:5:1
+Module not found: Can't resolve '@/lib/firebase'
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+  4 | import { User, onAuthStateChanged } from "firebase/auth";
+> 5 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | interface AuthContextType {
+  8 |   user: User | null;
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.868] Server  ERROR   ⨯ ./app/firestore.ts:16:1
+Module not found: Can't resolve '@/lib/firebase'
+  14 |   orderBy,
+  15 | } from "firebase/firestore";
+> 16 | import { db } from "@/lib/firebase";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+  19 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.870] Server  ERROR   ⨯ ./app/firestore.ts:16:1
+Module not found: Can't resolve '@/lib/firebase'
+  14 |   orderBy,
+  15 | } from "firebase/firestore";
+> 16 | import { db } from "@/lib/firebase";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+  19 |
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.873] Server  ERROR   ⨯ ./app/firestore.ts:18:1
+Module not found: Can't resolve '@/lib/firebase'
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+> 18 | import { auth } from "@/lib/firebase"; // Import auth
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | // Add a new task
+  21 | export async function addTask(text: string): Promise<string> {
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.876] Server  ERROR   ⨯ ./app/firestore.ts:18:1
+Module not found: Can't resolve '@/lib/firebase'
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+> 18 | import { auth } from "@/lib/firebase"; // Import auth
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | // Add a new task
+  21 | export async function addTask(text: string): Promise<string> {
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.881] Server  ERROR   ⨯ ./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.884] Server  ERROR   ⨯ ./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.888] Server  ERROR   ⨯ ./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.898] Server  ERROR   ⨯ ./app/page.tsx:6:1
+Module not found: Can't resolve '@/lib/firebase'
+  4 | import { useRouter } from "next/navigation";
+  5 | import { useEffect, useState, FormEvent } from "react";
+> 6 | import { auth } from "@/lib/firebase";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { addTask, getTasks, updateTask, deleteTask } from "./firestore";
+  8 | import { Task } from "./types";
+  9 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+Import map: aliased to relative './src/lib/firebase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.899] Server  ERROR   ⨯ ./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.899] Server  ERROR   ⨯ ./app/layout.tsx:5:1
+Module not found: Can't resolve '@/lib/utils'
+  3 | import "./globals.css";
+  4 | import { AuthProvider } from "./context/AuthContext";
+> 5 | import { cn } from "@/lib/utils";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const fontSans = FontSans({
+  8 |   subsets: ["latin"],
+
+Import map: aliased to relative './src/lib/utils' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.900] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.902] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.903] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.904] Server  ERROR   ⨯ ./app/context/AuthContext.tsx:4:1
+Module not found: Can't resolve 'firebase/auth'
+  2 |
+  3 | import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+> 4 | import { User, onAuthStateChanged } from "firebase/auth";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { auth } from "@/lib/firebase";
+  6 |
+  7 | interface AuthContextType {
+
+
+
+Import trace:
+  Server Component:
+    ./app/context/AuthContext.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.911] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.914] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.916] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.920] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.926] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.928] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.929] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.933] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.936] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.941] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:07:30.945] Server  ERROR   ⨯ ./app/firestore.ts:4:1
+Module not found: Can't resolve 'firebase/firestore'
+   2 | "use server";
+   3 |
+>  4 | import {
+     | ^^^^^^^^
+>  5 |   collection,
+     | ^^^^^^^^^^^^^
+>  6 |   addDoc,
+     | ^^^^^^^^^^^^^
+>  7 |   getDocs,
+     | ^^^^^^^^^^^^^
+>  8 |   query,
+     | ^^^^^^^^^^^^^
+>  9 |   where,
+     | ^^^^^^^^^^^^^
+> 10 |   deleteDoc,
+     | ^^^^^^^^^^^^^
+> 11 |   doc,
+     | ^^^^^^^^^^^^^
+> 12 |   updateDoc,
+     | ^^^^^^^^^^^^^
+> 13 |   serverTimestamp,
+     | ^^^^^^^^^^^^^
+> 14 |   orderBy,
+     | ^^^^^^^^^^^^^
+> 15 | } from "firebase/firestore";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  16 | import { db } from "@/lib/firebase";
+  17 | import { Task } from "./types";
+  18 | import { auth } from "@/lib/firebase"; // Import auth
+
+
 
 https://nextjs.org/docs/messages/module-not-found
 
