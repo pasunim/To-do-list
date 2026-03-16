@@ -25,11 +25,11 @@ export function success<T>(data: T): ApiResponse<T> {
   }
 }
 
-export function error(code: string, message: string): ApiError {
+export function error(message: string, code: string | number = 'ERROR'): ApiError {
   return {
     success: false,
     error: {
-      code,
+      code: String(code),
       message,
     },
   }

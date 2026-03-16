@@ -153,6 +153,15 @@ export default function DashboardPage() {
               <span className="text-sm text-muted-foreground">
                 {session?.user?.email}
               </span>
+              {session?.user?.roles?.includes('admin') && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => router.push('/admin')}
+                >
+                  Admin Panel
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
