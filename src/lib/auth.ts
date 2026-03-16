@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials'
 import Google from 'next-auth/providers/google'
 import { authService } from '@/services/authService'
 import { userRepository } from '@/repositories/userRepository'
+import { authConfig as baseAuthConfig } from '@/auth.config'
 
 declare module 'next-auth' {
   interface Session {
@@ -16,6 +17,7 @@ declare module 'next-auth' {
 }
 
 export const authConfig: NextAuthConfig = {
+  ...baseAuthConfig,
   providers: [
     Credentials({
       name: 'Credentials',
@@ -51,6 +53,7 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   callbacks: {
+    ...baseAuthConfig.callbacks,
     async signIn({ user, account }) {
       if (account?.provider === 'google' && user.email) {
         const existingUser = await userRepository.findByEmail(user.email)
@@ -64,43 +67,5 @@ export const authConfig: NextAuthConfig = {
 
       return true
     },
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id
-        token.roles = (user as any).roles || []
-      }
-
-      return token as any
-    },
-    async session({ session, token }: { session: any; token: any }) {
-      if (session.user && token) {
-        session.user.id = token.id
-        session.user.roles = token.roles
-      }
-
-      return session
-    },
-    async authorized({ request, auth }) {
-      const { pathname } = request.nextUrl
-      const isAuthenticated = !!auth?.user
-
-      if (pathname.startsWith('/dashboard') && !isAuthenticated) {
-        return false
-      }
-
-      if ((pathname === '/auth/login' || pathname === '/auth/register') && isAuthenticated) {
-        return false
-      }
-
-      return true
-    },
   },
-  pages: {
-    signIn: '/auth/login',
-    error: '/auth/error',
-  },
-  session: {
-    strategy: 'jwt',
-  },
-  secret: process.env.NEXTAUTH_SECRET,
 }
