@@ -100,7 +100,7 @@ export class TaskService {
           action: 'TASK_UPDATED',
           entity: 'Task',
           entityId: id,
-          metadata: input,
+          metadata: input as Record<string, unknown>,
         })
 
         logger.info('Task updated', { taskId: id, userId })
